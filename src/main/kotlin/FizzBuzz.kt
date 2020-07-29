@@ -4,8 +4,8 @@ fun main() {
 
 fun FizzBuzz(data: Int) =
     when {
-        (data % 5 == 0 && data % 3 == 0) -> "FizzBuzz"
-        (data % 5 == 0) -> "Buzz"
-        (data % 3 == 0) -> "Fizz"
-        else -> data.toString()
+        (data % 5 == 0 && data % 3 == 0) -> "$data: FizzBuzz"
+        (data % 5 == 0) -> "$data: Buzz"
+        (data % 3 == 0) -> "$data: Fizz"
+        else -> "$data:"
     }
