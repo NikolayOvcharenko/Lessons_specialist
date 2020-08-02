@@ -2,6 +2,10 @@ package strings
 
 fun String.lastCharOf(): Char = this.get(this.length - 1)
 
+// fun StringBuilder.lastChar: Char {
+//    get() = get(length - 1)
+//}
+
 fun String.allMatchesOf(patt: String): List<String> {
     val ret = mutableListOf<String>()
     val found = patt.toRegex().findAll(this)
@@ -10,6 +14,7 @@ fun String.allMatchesOf(patt: String): List<String> {
 }
 
 fun List<String>.firstElementOf(): String = get(0)
+
 fun main() {
     println("JAva".lastCharOf())
     println(listOf("one", "two").firstElementOf())
