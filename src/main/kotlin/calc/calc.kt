@@ -11,20 +11,23 @@ fun isValidId(string: String): Boolean {
     return string.matches("""[a-zA-Z0-9]\w{3,}""".toRegex())
 }
 
-interface  Animal {
+interface Animal {
     fun say()
 }
 
-class Goat: Animal {
+class Goat : Animal {
     override fun say() = println("Beee!")
 }
-class Cow: Animal {
+
+class Cow : Animal {
     override fun say() = println("Muuu!")
 }
-class Dog: Animal {
+
+class Dog : Animal {
     override fun say() = println("Bark Gau!")
 }
-class Cat: Animal {
+
+class Cat : Animal {
     override fun say() = println("Miau!")
 }
 
@@ -41,30 +44,57 @@ fun fib(number: Int): Int {
     return rezult
 }
 
+// interface Expr
+sealed class Expr //
+class Num(val value: Int) : Expr()
+class Sum(val left: Expr, val right: Expr) : Expr()
+class Mul(val left: Expr, val right: Expr) : Expr()
+
+fun eval(e: Expr): Int = when (e) {
+    is Num -> e.value
+    is Sum -> eval(e.left) + eval(e.right)
+    is Mul -> eval(e.left) * eval(e.right)
+    else -> throw IllegalAccessException("Uncnow expression")
+}
+
 fun main() {
 
-    
-/*
-    val farm = listOf(Dog(),Cow(),Goat(),Cat())
-    for(animal in farm) animal.say()
 
-       println(isValidId("test11"))
-       println(isValidId("te1"))
-       println(isValidId("1221"))
-       println(isValidId("test  11"))
-       println(isValidId("_test11"))
+    var b = StringBuilder("hello")
+    b.lastCharOf = '!'
+    println(b)
+    /*  println(
+          eval(
+              Sum(
+                  Num(2),
+                  Mul(
+                      Num(5),
+                      Num(6)
+                  )
+              )
+          )
+      )
+
+      val farm = listOf(Dog(),Cow(),Goat(),Cat())
+      for(animal in farm) animal.say()
+
+         println(isValidId("test11"))
+         println(isValidId("te1"))
+         println(isValidId("1221"))
+         println(isValidId("test  11"))
+         println(isValidId("_test11"))
 
 
-       // нахождение числа фибоначчи
-       println(fib(10))
+         // нахождение числа фибоначчи
+         println(fib(10))
 
-       // расширение .print()
-       val any = 123
-       println(any.print())
-       println("123".print())
-       println(123f.print())
-       val long: Long = 212
-   */
+         // расширение .print()
+         val any = 123
+         println(any.print())
+         println("123".print())
+         println(123f.print())
+         val long: Long = 212
+     */
 }
 
 fun Any.print(): String =
@@ -73,3 +103,9 @@ fun Any.print(): String =
         is Int -> "Int: $this"
         else -> "Don't know: $this"
     }
+
+fun StringBuilder.lastCharOf() : Char = get(length - 1)
+
+var StringBuilder.lastCharOf : Char
+    get() = get(length - 1)
+    set(value) = setCharAt(length - 1, value)
