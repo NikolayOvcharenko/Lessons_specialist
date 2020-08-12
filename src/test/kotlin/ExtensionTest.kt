@@ -1,13 +1,15 @@
 import org.junit.jupiter.api.Assertions.assertIterableEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import strings.allMatchesOf
+import strings.*
 
 class ExtensionTest {
-    @Test
-    fun testExtensionFunction() {
-        assertIterableEquals(
-            listOf ("<html>", "<html>"),
-            "<html><html>hello".allMatchesOf("""<[^>/]+>""")
-        )
-    }
+//    @Disabled
+//    @Test
+//    fun testExtensionFunction() {
+//        assertIterableEquals(
+//            listOf ("<html>", "<html>"),
+//            "<html><html>hello".allMatchesOf("""<[^>/]+>""")
+//        )
+//    }
 }
