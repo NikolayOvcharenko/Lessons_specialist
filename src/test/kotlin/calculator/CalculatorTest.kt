@@ -10,15 +10,18 @@ import java.lang.AssertionError
 import java.util.stream.Stream
 
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS) // один раз создавать класс
+// @TestInstance(TestInstance.Lifecycle.PER_CLASS) // один раз создавать класс
 class CalculatorTest {
     init {
         println("init")
     }
 
-    @BeforeAll
-    fun prepare() {
-        println("Prepare")
+    companion object Initialiser {
+        @BeforeAll
+        @JvmStatic
+        fun prepare() {
+            println("Prepare")
+        }
     }
 
     @BeforeEach
@@ -89,7 +92,7 @@ class CalculatorTest {
         assertEquals("Division by Zero", exception.message, "Exception should be 'Division by Zero'")
     }
 
-    @Disabled
+    // @Disabled
     @Test
     fun combineAddAndMul() {
         val calculator = Calculator(15)
@@ -117,7 +120,6 @@ class CalculatorTest {
         )
 
     }
-
 
 
 }

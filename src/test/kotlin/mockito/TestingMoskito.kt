@@ -1,15 +1,13 @@
 package mockito
 
+import bookservice.LendBookManager
 import net.bytebuddy.asm.Advice
 import net.bytebuddy.dynamic.scaffold.MethodGraph
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatcher
-import org.mockito.ArgumentMatchers
-import org.mockito.Captor
+import org.mockito.*
 import org.mockito.Mockito.*
 import java.util.*
 
@@ -64,6 +62,9 @@ class TestingMoskito {
     fun testVerify() {
         val test = mock (MyKlass::class.java)
         `when`(test.getUniqueId()).thenReturn(43)
+
+        val inOrder = inOrder(test)
+
         test.testing(12)
         test.getUniqueId()
         test.getUniqueId()
@@ -73,6 +74,10 @@ class TestingMoskito {
         verify(test, atLeast(1)).getUniqueId()
         verify(test, atMost(10)).getUniqueId()
         verify(test, never()).someMethod("newer called")
+
+        inOrder.verify(test).testing(12)
+        inOrder.verify(test, times(2)).getUniqueId()
+
         verifyNoMoreInteractions(test)
 
     }
